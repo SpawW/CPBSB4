@@ -20,7 +20,9 @@
         status: enabled
         state: present
         inventory_mode: manual
-        inventory_zabbix:
+        # inventory_zabbix:
+        #   location_lat: '-15.783881512'
+        #   location_lon: '-47.898887720'
         #   tag: "{{ your_tag }}"
         #   alias: "{{ your_alias }}"
         #   notes: "Special Informations: {{ your_informations | default('None') }}"
@@ -28,8 +30,6 @@
         #   site_rack: "{{ your_site_rack }}"
         #   os: "{{ your_os }}"
         #   hardware: "{{ your_hardware }}"
-          location_lat: '-15.783881512'
-          location_lon: '-47.898887720'
         interfaces:
           - type: "1"
             main: "1"
