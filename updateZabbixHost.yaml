@@ -16,7 +16,6 @@
         description: Zabbix Server Host Example
         host_groups:
           - Zabbix servers
-        #   - Example group2
         status: enabled
         state: present
         inventory_mode: manual
@@ -37,3 +36,34 @@
             # ip: 10.xx.xx.xx
             dns: "zabbix-agent"
             port: "10050"
+
+    # - name: Create a new host or update an existing host's info
+    #   local_action:
+    #     module: community.zabbix.zabbix_host
+    #     server_url: http://localhost
+    #     login_user: Admin
+    #     login_password: zabbix
+    #     host_name: Torre_de_TV
+    #     description: Torre de TV
+    #     host_groups:
+    #       - Zabbix servers
+    #     status: enabled
+    #     state: present
+    #     inventory_mode: manual
+    #     inventory_zabbix:
+    #       location_lat: '-15.790728543'
+    #       location_lon: '-47.892866271'
+    #     #   tag: "{{ your_tag }}"
+    #     #   alias: "{{ your_alias }}"
+    #     #   notes: "Special Informations: {{ your_informations | default('None') }}"
+    #     #   location: "{{ your_location }}"
+    #     #   site_rack: "{{ your_site_rack }}"
+    #     #   os: "{{ your_os }}"
+    #     #   hardware: "{{ your_hardware }}"
+    #     interfaces:
+    #       - type: "1"
+    #         main: "1"
+    #         useip: 0
+    #         # ip: 10.xx.xx.xx
+    #         dns: "zabbix-agent"
+    #         port: "10050"
