@@ -8,7 +8,7 @@ zabbix_export:
   hosts:
     -
       host: ICMP-Padrao
-      name: ICMP-Padrao
+      name: ICMP-Padrao-Errado
       templates:
         -
           name: 'ICMP Ping'
