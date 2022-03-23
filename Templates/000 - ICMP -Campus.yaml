@@ -1,0 +1,41 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-03-23T00:29:53Z'
+  groups:
+    -
+      uuid: a4581aca6ba34faeb865fbf6d787efdd
+      name: CPBR
+  templates:
+    -
+      uuid: a9668a25b4b5451f8ae5f1fb8be1c1ac
+      template: '000 - ICMP - Campus'
+      name: '000 - ICMP - Campus'
+      groups:
+        -
+          name: CPBR
+      items:
+        -
+          uuid: 10ef64edd7394eae98552c5771996c3f
+          name: 'ICMP response time'
+          type: SIMPLE
+          key: icmppingsec
+          history: 1w
+          value_type: FLOAT
+          units: s
+          tags:
+            -
+              tag: Application
+              value: Status
+        -
+          uuid: 9f4a69ba45284c76a82f65ce7095ea29
+          name: 'ICMP - Status'
+          type: DEPENDENT
+          key: icmppingsec.status
+          delay: '0'
+          preprocessing:
+            -
+              type: JAVASCRIPT
+              parameters:
+                - 'return (value > 0 ? 1 : 0)'
+          master_item:
+            key: icmppingsec

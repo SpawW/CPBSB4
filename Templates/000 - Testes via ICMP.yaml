@@ -1,0 +1,103 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-03-23T00:30:02Z'
+  groups:
+    -
+      uuid: 07141801951649b79bc684f8bc9b3831
+      name: '000 - Sem Agente'
+  templates:
+    -
+      uuid: aed9cb88fd1c41328ff990e3d84083d5
+      template: 000_ICMP
+      name: '000 - Testes via ICMP'
+      groups:
+        -
+          name: '000 - Sem Agente'
+      items:
+        -
+          uuid: 4f2f7fe830c542ac96562b400c5ad28e
+          name: 'ICMP - Status'
+          type: DEPENDENT
+          key: icmppingsec.status
+          delay: '0'
+          history: 7d
+          valuemap:
+            name: 'Service state'
+          preprocessing:
+            -
+              type: JAVASCRIPT
+              parameters:
+                - 'return (value > 0 ? 1 : 0)'
+            -
+              type: DISCARD_UNCHANGED
+              parameters:
+                - ''
+          master_item:
+            key: 'icmppingsec[,{$QTD_PING},200,,{$TIMEOUT_PING},avg]'
+          tags:
+            -
+              tag: Application
+              value: Status
+          triggers:
+            -
+              uuid: c6299709c3d949c688c3554e94357d30
+              expression: 'sum(/000_ICMP/icmppingsec.status,{$000_ICMP_PERIODO})={$000_ICMP_LIMITE}'
+              name: 'ICMP Ping Check'
+              priority: DISASTER
+              description: 'Verifica se os ultimos X testes falharam (ou os últimos X segundos).'
+        -
+          uuid: 0290d6472b044fa49e1b353c808571fd
+          name: 'ICMP - Tempo de resposta'
+          type: SIMPLE
+          key: 'icmppingsec[,{$QTD_PING},200,,{$TIMEOUT_PING},avg]'
+          delay: 10s
+          history: 30d
+          value_type: FLOAT
+          tags:
+            -
+              tag: Application
+              value: Status
+      macros:
+        -
+          macro: '{$000_ICMP_LIMITE}'
+          value: '0'
+        -
+          macro: '{$000_ICMP_PERIODO}'
+          value: '300'
+        -
+          macro: '{$QTD_PING}'
+          value: '5'
+        -
+          macro: '{$TIMEOUT_PING}'
+          value: '2000'
+      valuemaps:
+        -
+          uuid: c89ebf6e113b408e821919b61226c3f5
+          name: 'Service state'
+          mappings:
+            -
+              value: '0'
+              newvalue: Down
+            -
+              value: '1'
+              newvalue: Up
+  graphs:
+    -
+      uuid: 2d5115c717724bad9624884dcea9b9aa
+      name: 'Performance - ICMP'
+      show_legend: 'NO'
+      graph_items:
+        -
+          drawtype: GRADIENT_LINE
+          color: FF3333
+          calc_fnc: MAX
+          item:
+            host: 000_ICMP
+            key: 'icmppingsec[,{$QTD_PING},200,,{$TIMEOUT_PING},avg]'
+        -
+          sortorder: '1'
+          drawtype: GRADIENT_LINE
+          color: 00C800
+          item:
+            host: 000_ICMP
+            key: 'icmppingsec[,{$QTD_PING},200,,{$TIMEOUT_PING},avg]'
