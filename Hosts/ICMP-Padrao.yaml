@@ -1,0 +1,22 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-03-23T00:33:41Z'
+  groups:
+    -
+      uuid: a4581aca6ba34faeb865fbf6d787efdd
+      name: CPBR
+  hosts:
+    -
+      host: ICMP-Padrao
+      name: ICMP-Padrao
+      templates:
+        -
+          name: 'ICMP Ping'
+      groups:
+        -
+          name: CPBR13
+      interfaces:
+        -
+          ip: 192.168.100.100
+          interface_ref: if1
+      inventory_mode: DISABLED

@@ -1,0 +1,21 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-03-23T00:33:50Z'
+  groups:
+    -
+      uuid: a4581aca6ba34faeb865fbf6d787efdd
+      name: CPBR
+  hosts:
+    -
+      host: ICMP-Tuning-Campus
+      name: ICMP-Tuning-Campus
+      templates:
+        -
+          name: 000_ICMP
+      groups:
+        -
+          name: CPBR13
+      interfaces:
+        -
+          interface_ref: if1
+      inventory_mode: DISABLED
