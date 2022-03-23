@@ -9,7 +9,7 @@
     - name: Create a new host or update an existing host's info
       local_action:
         module: community.zabbix.zabbix_host
-        server_url: http://172.18.0.1
+        server_url: http://localhost
         login_user: Admin
         login_password: zabbix
         host_name: Zabbix server
