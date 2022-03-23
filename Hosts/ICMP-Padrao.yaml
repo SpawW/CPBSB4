@@ -14,7 +14,7 @@ zabbix_export:
           name: 'ICMP Ping'
       groups:
         -
-          name: CPBR13
+          name: CPBR
       interfaces:
         -
           ip: 192.168.100.100
