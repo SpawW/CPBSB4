@@ -28,6 +28,8 @@
         #   site_rack: "{{ your_site_rack }}"
         #   os: "{{ your_os }}"
         #   hardware: "{{ your_hardware }}"
+        #   location_lat: '-15.7839491'
+        #   location_lon: '-47.8818059'
         interfaces:
           - type: "1"
             main: "1"
